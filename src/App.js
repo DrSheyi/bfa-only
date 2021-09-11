@@ -27,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
     item:{
         display:'flex',
         flexWrap:'wrap',
-        width:'80%',
-        justifyContent:'space-around',
+        width:'100%',
+        justifyContent:'center',
+        alignItems:'center',
         flexDirection:'column',
         
         
@@ -1032,10 +1033,16 @@ function handlepowerhoptestright(e){
 function handleckcuest(e){
     e.preventDefault()
     setckcuest(e.target.value)
+    if(Number(ckcuest)>=25){setckcuest("100")}
+    else if(Number(ckcuest)<25&&Number(ckcuest)>=20){setckcuest("75")}
+    else if(Number(ckcuest)<20&&Number(ckcuest)>=15){setckcuest("25")}
+    else if(Number(ckcuest)<15){setckcuest("0")}
+   
 }
 async function submitdata(e){
   e.preventDefault()
   setSubmited(true)
+
   let data = {
     "height":height,
 "weight":weight,
@@ -1158,8 +1165,10 @@ function returnhome(e){
 
     return(
     <Container className="App">
+      <Typography className={classes.itemTitle}>BFA FORM</Typography>
     {submited===false?
-    <div>
+    <div style={{border:'2px black solid', margin:"10px 0"}}>
+      
       <div className={classes.item} >
         <Typography className={classes.itemTitle}>Station 1</Typography>
 
@@ -1176,6 +1185,7 @@ function returnhome(e){
       <Typography htmlFor="weight">Enter your Resting HR)</Typography>
       <TextField variant="outlined" id="restinghr" onChange={handlerestinghr}/>
       </div>
+      <div style={{border:'2px black solid', margin:"10px 0"}}>
         <div className={classes.item}>
         
         <Typography  className={classes.itemTitle}>Station 2</Typography>
@@ -1265,12 +1275,13 @@ function returnhome(e){
         </FormControl>
         </div>
         </div>
-      <div><Typography  className={classes.itemTitle}>Station 3A</Typography></div>
+        </div>
+        <div className={classes.item} style={{border:'2px black solid', margin:"10px 0"}}><Typography  className={classes.itemTitle}>Station 3A</Typography>
+      <div style={{margin:"10px auto"}}>
       <Typography  className={classes.itemTitle}>
         1. Scoliosis: Adams's Forward Bending
       </Typography>
       <div className={classes.slides}> 
-
      <Slider
       min={0}
       max={2}
@@ -1281,6 +1292,7 @@ function returnhome(e){
         valueLabelDisplay="auto"
         marks={marks} 
       />
+      </div>
       </div>
   
       <div className={classes.slides}>
@@ -1527,7 +1539,7 @@ function returnhome(e){
         
         </div>
     </div>
-
+</div>
 
     <Typography className={classes.itemTitle}>station 3B</Typography>
     <div style={{margin:'5%',display:'flex',flexDirection:'column'}}>
@@ -1581,7 +1593,8 @@ function returnhome(e){
             </div>
 
 
-            <div>
+            <div style={{border:'2px black solid', margin:"10px 0"}}>
+
     <div className={classes.item}>
     <Typography className={classes.itemTitle}>station 4</Typography>
 
@@ -1691,7 +1704,8 @@ function returnhome(e){
         
         </div>
         </div>
-
+        
+        <div style={{border:'2px black solid', margin:"10px 0"}}>
     <Typography className={classes.itemTitle}>Station 5:  HANDHELD DYNAMOMETRY</Typography>
 
 
@@ -1736,8 +1750,8 @@ function returnhome(e){
         <TextField  label="" variant="outlined"   onChange={handlekneeflexionright}/>
         <TextField  label="" variant="outlined"   onChange={handlekneeflexionright2}/>
         </div>
-
-
+</div>
+<div style={{border:'2px black solid', margin:"10px 0"}}>
     <Typography className={classes.itemTitle}>Station 6: Balance</Typography>
 <div className={classes.item}>
 <div>
@@ -1793,8 +1807,9 @@ function returnhome(e){
         </div>
         </div>
             
-           
-
+        </div>    
+            
+        <div style={{border:'2px black solid', margin:"10px 0"}}>
     <Typography className={classes.itemTitle}>Station 7- LOWER EXTREMITY ENDURANCE </Typography>
 
             <div>
@@ -1854,8 +1869,9 @@ function returnhome(e){
         
      
         </div>
+        </div>
 
-<div> <Fab variant="extended" color="primary"><Button onClick={submitdata}> SUBMIT</Button></Fab></div>
+<div style={{margin:'10px'}}> <Fab variant="extended" color="primary"><Button onClick={submitdata}> SUBMIT</Button></Fab></div>
 </div>
 </div>
 :
@@ -1903,6 +1919,7 @@ function returnhome(e){
 <div>{`Beighton Score: ${beightonscore}`}</div>
 <div>{`1st Position Turnout: ${stpostitionturnoutleft+stpostitionturnoutright}`}</div>
 <div>{`1st Position Discs ${firstpositiondiscsleft+firstpositiondiscsright}`}</div>
+
 <Typography className={classes.itemTitle}>Station 4</Typography>
 <div>{thomastestleft.length<1?thomastestleft.map(item=>`Left ${item} Problem`):null}</div>
 <div>{thomastestright.length<1?thomastestright.map(item=>`Right ${item} Problem`):null}</div>
@@ -1989,10 +2006,7 @@ powerhoptestright<139?setpowerhoptestright("Poor"):null
 :null
  }
 
- {ckcuest>=25?setckcuest("100"):
-ckcuest<25&&ckcuest>=20?setckcuest("75"):
-ckcuest<20&&ckcuest>=15?setckcuest("25"):
-ckcuest<15?setckcuest("0"):null}
+
 
 <div>{`Single Leg Releve left: ${singlelegreleveleft}, Single Leg Releve right: ${singlelegreleveright}`}</div>
 <div>{`Single Leg Releve left: ${singlelegbridgeleft}, Single Leg Releve right: ${singlelegbridgeright}`}</div>
@@ -2000,7 +2014,7 @@ ckcuest<15?setckcuest("0"):null}
 <div>{`Single Leg Releve left: ${powerhoptestleft}, Single Leg Releve right: ${powerhoptestright}`}</div>
 <div>{`CKCUEST: ${ckcuest}`}</div>
 <div></div>
-<div> <Fab variant="extended" color="secondary"><Button onClick={returnhome}> Go Back</Button></Fab></div>
+<div style={{margin:'10px'}}> <Fab variant="extended" color="secondary"><Button onClick={returnhome}> Go Back</Button></Fab></div>
 <Typography style={{color:'#00f'}} className={classes.itemTitle}>Please take a screenshot and save it for your own records</Typography>
 
 
