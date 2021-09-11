@@ -348,7 +348,7 @@ const [kneeflexion2, setkneeflexion2] = useState("")
 
    const [ckcuest,setckcuest] = useState("")
 
-   const [submited, setSubmited] = useState(true)
+   const [submited, setSubmited] = useState(false)
    const [beightonscore,setBeightonScore] = useState(0)
 
    const [singlelimbsquat,setSingleLimbSquat] = useState(0)
